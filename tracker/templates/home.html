@@ -1,5 +1,10 @@
-{% extends 'base.html' %}
-{% block content %}
+{% extends 'base.html' %} {% block content %}
 
-<h3>Home Page</h3>
+<h2>Expense List</h2>
+<ul>
+	{% for expense in expenses %}
+	<li>{{ expense.description }} - Kshs {{ expense.amount }}</li>
+	{% endfor %}
+</ul>
+
 {% endblock content %}

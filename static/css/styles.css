@@ -1,0 +1,25 @@
+/* styles.css in the expense_tracker/static/expense_tracker/ directory */
+
+/* Style the header */
+h1 {
+	text-align: center;
+	background-color: #3498db;
+	color: #fff;
+	padding: 10px;
+}
+
+/* Style the list */
+ul {
+	list-style-type: none;
+	padding: 0;
+}
+
+li {
+	padding: 5px 0;
+	border-bottom: 1px solid #ccc;
+}
+
+/* Add hover effect to list items */
+li:hover {
+	background-color: #f2f2f2;
+}
