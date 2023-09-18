@@ -3,7 +3,10 @@
 <h2>Expense List</h2>
 <ul>
 	{% for expense in expenses %}
-	<li>{{ expense.description }} - Kshs {{ expense.amount }}</li>
+	<li>
+		{{ expense.description }} - Kshs {{ expense.amount }} on {{ expense.date }}
+		[ {{ expense.category }} ]
+	</li>
 	{% endfor %}
 </ul>
 

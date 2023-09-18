@@ -8,6 +8,9 @@
 		<link rel="stylesheet" href="{% static 'css/styles.css' %}" />
 	</head>
 	<body>
+		<nav>
+			<a href="{% url 'add_expense' %}" class="btn btn-primary">Add Expense</a>
+		</nav>
 		{% block content %} {% endblock content %}
 	</body>
 </html>
