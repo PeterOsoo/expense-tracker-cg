@@ -6,6 +6,10 @@
 	<li>
 		{{ expense.description }} - Kshs {{ expense.amount }} on {{ expense.date }}
 		[ {{ expense.category }} ]
+
+		<a href="{% url 'edit_expense' expense.id %}" class="btn btn-primary"
+			>Edit
+		</a>
 	</li>
 	{% endfor %}
 </ul>
