@@ -1,6 +1,9 @@
 {% extends 'base.html' %} {% block content %}
 
 <h2>Expense List</h2>
+<nav>
+	<a href="{% url 'add_expense' %}" class="btn btn-primary">Add Expense</a>
+</nav>
 <ul>
 	{% for expense in expenses %}
 	<li>
@@ -8,8 +11,11 @@
 		[ {{ expense.category }} ]
 
 		<a href="{% url 'edit_expense' expense.id %}" class="btn btn-primary"
-			>Edit
-		</a>
+			>Edit</a
+		>
+		<a href="{% url 'delete_expense' expense.id %}" class="btn btn-danger"
+			>Delete</a
+		>
 	</li>
 	{% endfor %}
 </ul>

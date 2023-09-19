@@ -63,3 +63,17 @@ button:hover {
 .btn-secondary:hover {
 	background-color: #444;
 }
+
+/* Style the "Delete" button */
+.btn-danger {
+	background-color: #e74c3c;
+	color: #fff;
+	padding: 5px 10px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.btn-danger:hover {
+	background-color: #c0392b;
+}

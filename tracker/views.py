@@ -1,5 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse_lazy
+
+from django.views.generic.edit import DeleteView
+
 
 from .models import Expense
 from .forms import ExpenseForm
@@ -33,3 +37,8 @@ def edit_expense(request, expense_id):
     else:
         form = ExpenseForm(instance=expense)
     return render(request, 'tracker/expense_form.html', {'form': form})
+
+
+class ExpenseDeleteView(DeleteView):
+    model = Expense
+    success_url = reverse_lazy('expense_list')
