@@ -15,8 +15,12 @@ from .forms import ExpenseForm
 
 
 def index(request):
+    return render(request, 'home.html', {})
+
+
+def expense_list(request):
     expenses = Expense.objects.all()
-    return render(request, 'home.html', {'expenses': expenses})
+    return render(request, 'tracker/expense_list.html', {'expenses': expenses})
 
 
 @login_required
