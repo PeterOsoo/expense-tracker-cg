@@ -18,8 +18,10 @@ def index(request):
     return render(request, 'home.html', {})
 
 
+@login_required
 def expense_list(request):
-    expenses = Expense.objects.all()
+    # expenses = Expense.objects.all()
+    expenses = Expense.objects.filter(user=request.user)
     return render(request, 'tracker/expense_list.html', {'expenses': expenses})
 
 
