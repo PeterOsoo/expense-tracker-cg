@@ -1,25 +1,6 @@
 {% extends 'base.html' %} {% block content %}
 
-<h2>Expense List</h2>
+<h2>Track your Expenses!!</h2>
 
-<ul>
-	{% for expense in expenses %}
-	<li>
-		{{ expense.description }} - Kshs {{ expense.amount }} on {{ expense.date }}
-		[ {{ expense.category }} ]
-		<!-- not auth  -->
-		{% if user.is_authenticated %}
-		<a href="{% url 'edit_expense' expense.id %}" class="btn btn-dark btn-sm"
-			>Edit</a
-		>
-		<a
-			href="{% url 'delete_expense' expense.id %}"
-			class="btn btn-danger btn-sm"
-			>Delete</a
-		>
-		{% endif %}
-	</li>
-	{% endfor %}
-</ul>
 <p>Lorem Ipsum</p>
 {% endblock content %}
