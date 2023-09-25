@@ -4,6 +4,9 @@ from django.urls import reverse_lazy
 
 from django.views.generic.edit import DeleteView
 
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login
+
 
 from .models import Expense
 from .forms import ExpenseForm
@@ -42,3 +45,15 @@ def edit_expense(request, expense_id):
 class ExpenseDeleteView(DeleteView):
     model = Expense
     success_url = reverse_lazy('expense_list')
+
+
+def register(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('expense_list')
+    else:
+        form = UserCreationForm()
+    return render(request, 'registration/register.html', {'form': form})
