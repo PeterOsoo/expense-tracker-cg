@@ -21,7 +21,9 @@ def index(request):
 @login_required
 def expense_list(request):
     # expenses = Expense.objects.all()
-    expenses = Expense.objects.filter(user=request.user)
+    # expenses = Expense.objects.filter(user=request.user)
+    expenses = Expense.objects.filter(user=request.user).order_by('-date')
+
     return render(request, 'tracker/expense_list.html', {'expenses': expenses})
 
 
@@ -73,7 +75,7 @@ def login(request):
         form = AuthenticationForm(request, request.POST)
         if form.is_valid():
             auth_login(request, form.get_user())
-            return redirect('expense_list')
+            return redirect('home')
     else:
         form = AuthenticationForm()
     return render(request, 'registration/login.html', {'form': form})
