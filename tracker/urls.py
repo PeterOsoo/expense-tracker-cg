@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import index, add_expense, edit_expense, ExpenseDeleteView, register
+from .views import index, add_expense, edit_expense, ExpenseDeleteView, register, login, logout_view
 
 urlpatterns = [
     path('', index, name="expense_list"),
@@ -8,5 +8,7 @@ urlpatterns = [
     path('expenses/delete/<int:pk>/', ExpenseDeleteView.as_view(),
          name='delete_expense'),
     path('register/', register, name='register'),
+    path('login/', login, name='login'),
+    path('logout/', logout_view, name='logout'),
 
 ]

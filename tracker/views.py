@@ -4,8 +4,10 @@ from django.urls import reverse_lazy
 
 from django.views.generic.edit import DeleteView
 
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth import login
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+
+from django.contrib.auth import login as auth_login, logout
+from django.shortcuts import render, redirect
 
 
 from .models import Expense
@@ -30,6 +32,7 @@ def add_expense(request):
     return render(request, 'tracker/expense_form.html', {'form': form})
 
 
+@login_required
 def edit_expense(request, expense_id):
     expense = get_object_or_404(Expense, id=expense_id)
     if request.method == 'POST':
@@ -52,8 +55,24 @@ def register(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
-            login(request, user)
+            auth_login(request, user)
             return redirect('expense_list')
     else:
         form = UserCreationForm()
     return render(request, 'registration/register.html', {'form': form})
+
+
+def login(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(request, request.POST)
+        if form.is_valid():
+            auth_login(request, form.get_user())
+            return redirect('expense_list')
+    else:
+        form = AuthenticationForm()
+    return render(request, 'registration/login.html', {'form': form})
+
+
+def logout_view(request):
+    logout(request)
+    return redirect('login')
