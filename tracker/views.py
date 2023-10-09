@@ -3,6 +3,8 @@ from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
 
 from django.views.generic.edit import DeleteView
+from django.utils.decorators import method_decorator
+
 
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 
@@ -43,6 +45,13 @@ def add_expense(request):
 @login_required
 def edit_expense(request, expense_id):
     expense = get_object_or_404(Expense, id=expense_id)
+
+    # Check if the logged-in user is the owner of the expense
+    if expense.user != request.user:
+        # Handle unauthorized access, e.g., redirect or display an error message
+        # Redirect to the expense list or a suitable page
+        return redirect('expense_list')
+
     if request.method == 'POST':
         form = ExpenseForm(request.POST, instance=expense)
         if form.is_valid():
@@ -53,9 +62,18 @@ def edit_expense(request, expense_id):
     return render(request, 'tracker/expense_form.html', {'form': form})
 
 
+@method_decorator(login_required, name='dispatch')
 class ExpenseDeleteView(DeleteView):
     model = Expense
+    template_name = 'tracker/expense_confirm_delete.html'
     success_url = reverse_lazy('expense_list')
+
+    def get(self, request, *args, **kwargs):
+        expense = self.get_object()
+        if expense.user != self.request.user:
+            # Redirect to the expense list for unauthorized users
+            return redirect('expense_list')
+        return super().get(request, *args, **kwargs)
 
 
 def register(request):
