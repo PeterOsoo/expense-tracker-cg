@@ -4,9 +4,12 @@
 	{% csrf_token %} {{ form.as_p }}
 	<button type="submit">Register</button>
 </form>
-
-<p>
+<br />
+<!-- login  -->
+<p class="d-flex justify-content-center">
 	Already have an account?
-	<a href="{% url 'login' %}" class="btn btn-outline-dark btn-sm">Login </a>
+	<a href="{% url 'login' %}" class="btn btn-outline-dark btn-sm ml-2"
+		>Login
+	</a>
 </p>
 {% endblock %}
