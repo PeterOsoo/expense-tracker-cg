@@ -13,7 +13,7 @@ from django.shortcuts import render, redirect
 
 
 from .models import Expense
-from .forms import ExpenseForm
+from .forms import ExpenseForm, CustomUserCreationForm
 
 
 def index(request):
@@ -78,13 +78,14 @@ class ExpenseDeleteView(DeleteView):
 
 def register(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = CustomUserCreationForm(request.POST)
+        # form = UserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
             auth_login(request, user)
             return redirect('expense_list')
     else:
-        form = UserCreationForm()
+        form = CustomUserCreationForm()
     return render(request, 'registration/register.html', {'form': form})
 
 
