@@ -11,6 +11,8 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login as auth_login, logout
 from django.shortcuts import render, redirect
 
+from .decorators import redirect_logged_in_user
+
 
 from .models import Expense
 from .forms import ExpenseForm, CustomUserCreationForm
@@ -76,6 +78,7 @@ class ExpenseDeleteView(DeleteView):
         return super().get(request, *args, **kwargs)
 
 
+@redirect_logged_in_user
 def register(request):
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
