@@ -1,3 +1,4 @@
+<!-- We are using same form for edit and add expense  -->
 {% extends "base.html" %} {% block content %}
 <h2>{% if form.instance.id %}Edit Expense{% else %}Add Expense{% endif %}</h2>
 <form method="post">
