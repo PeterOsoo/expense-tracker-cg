@@ -31,6 +31,11 @@ def expense_list(request):
     return render(request, 'tracker/expense_list.html', {'expenses': expenses})
 
 
+def expense_detail(request, expense_id):
+    expense = get_object_or_404(Expense, pk=expense_id)
+    return render(request, 'tracker/expense_detail.html', {'expense': expense})
+
+
 @login_required
 def add_expense(request):
     if request.method == 'POST':
