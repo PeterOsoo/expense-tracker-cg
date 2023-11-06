@@ -20,4 +20,4 @@ class Expense(models.Model):
         Category, on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
-        return self.description
+        return f"{self.description} by {self.user} "
