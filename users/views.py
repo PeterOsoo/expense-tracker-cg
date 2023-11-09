@@ -42,3 +42,12 @@ def login(request):
 def logout_view(request):
     logout(request)
     return redirect('login')
+
+
+def logout_confirmation(request):
+    if not request.user.is_authenticated:
+        return render(request, 'users/logout_confirmation.html')
+    else:
+        # If the user is logged in, log them out
+        logout(request)
+        return render(request, 'users/logout_confirmation.html')
