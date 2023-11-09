@@ -1,6 +1,8 @@
 from django.urls import path
 from .views import (index, expense_list, add_expense, edit_expense, expense_detail,
-                    ExpenseDeleteView, register, login, logout_view)
+                    ExpenseDeleteView)
+
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('', index, name="home"),
@@ -12,8 +14,6 @@ urlpatterns = [
     path('edit/<int:expense_id>/', edit_expense, name='edit_expense'),
     path('expenses/delete/<int:pk>/', ExpenseDeleteView.as_view(),
          name='delete_expense'),
-    path('register/', register, name='register'),
-    path('login/', login, name='login'),
-    path('logout/', logout_view, name='logout'),
+
 
 ]
