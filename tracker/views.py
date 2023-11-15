@@ -7,6 +7,7 @@ from django.utils.decorators import method_decorator
 
 
 from django.contrib.auth.forms import UserCreationForm
+from django.views.generic import DetailView
 
 
 from django.contrib import messages
@@ -27,6 +28,12 @@ def expense_list(request):
     expenses = Expense.objects.filter(user=request.user).order_by('-date')
 
     return render(request, 'tracker/expense_list.html', {'expenses': expenses})
+
+# detail view
+
+
+class ExpenseDetailView(DetailView):
+    model = Expense
 
 
 def expense_detail(request, expense_id):

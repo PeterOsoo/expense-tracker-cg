@@ -1,9 +1,9 @@
 {% extends "base.html" %} {% block content %}
-<h2>{{ expense.description }} - Details</h2>
-<p><strong>Date:</strong> {{ expense.date }}</p>
-<p><strong>Description:</strong> {{ expense.description }}</p>
-<p><strong>Amount:</strong> Kshs {{ expense.amount }}</p>
-<p><strong>Category:</strong> {{ expense.category }}</p>
+<h2>{{ object.description }} - Details</h2>
+<p><strong>Date:</strong> {{ object.date }}</p>
+<p><strong>Description:</strong> {{ object.description }}</p>
+<p><strong>Amount:</strong> Kshs {{ object.amount }}</p>
+<p><strong>Category:</strong> {{ object.category }}</p>
 <p><strong>Receipt:</strong> Image of receipt</p>
 <!-- Add more details as needed -->
 <br />
