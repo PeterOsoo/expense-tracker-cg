@@ -1,8 +1,8 @@
 <!-- We are using same form for edit and add expense  -->
-{% extends "base.html" %} {% block content %}
+{% extends "base.html" %} {% load crispy_forms_tags %} {% block content %}
 <h2>{% if form.instance.id %}Edit Expense{% else %}Add Expense{% endif %}</h2>
 <form method="post">
-	{% csrf_token %} {{ form.as_p }}
+	{% csrf_token %} {{ form.as_p}}
 	<button type="submit" class="btn btn-primary">
 		{% if form.instance.id %}Save Changes{% else %}Add Expense{% endif %}
 	</button>
