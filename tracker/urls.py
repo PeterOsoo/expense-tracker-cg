@@ -12,7 +12,7 @@ urlpatterns = [
          ExpenseDetailView.as_view(), name='expense_detail'),
 
     path('edit/<int:expense_id>/', edit_expense, name='edit_expense'),
-    path('expenses/delete/<int:pk>/', ExpenseDeleteView.as_view(),
+    path('expense/delete/<int:pk>/', ExpenseDeleteView.as_view(),
          name='delete_expense'),
 
 
