@@ -1,21 +1,20 @@
 {% extends "base.html" %} {% block content %}
-<h2>Login</h2>
-<form method="post">
-	{% csrf_token %}
-	<div class="form-group">
-		{{ form.username.label_tag }} {{ form.username }}
+<div class="content-section">
+	<form method="POST">
+		{% csrf_token %}
+		<fieldset class="form-group">
+			<legend class="border-bottom mb-4">Log In</legend>
+			{{ form.as_p }}
+		</fieldset>
+		<div class="form-group">
+			<button class="btn btn-outline-info" type="submit">Login</button>
+		</div>
+	</form>
+	<div class="border-top pt-3">
+		<small class="text-muted">
+			Need An Account?
+			<a class="ml-2" href="{% url 'register' %}">Sign Up Now</a>
+		</small>
 	</div>
-	<div class="form-group">
-		{{ form.password.label_tag }} {{ form.password }}
-	</div>
-	<button type="submit" class="btn btn-primary">Login</button>
-</form>
-<p class="d-flex justify-content-center">
-	<small class="test-muted">
-		Don't have an account?
-		<a href="{% url 'register' %}" class="btn btn-outline-dark btn-sm ml-2"
-			>Register
-		</a>
-	</small>
-</p>
+</div>
 {% endblock %}
