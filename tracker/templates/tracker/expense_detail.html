@@ -1,5 +1,12 @@
 {% extends "base.html" %} {% block content %}
-<h2>{{ object.description }} - Details</h2>
+
+<header class="py-4" style="color: #151515">
+	<div class="container border-bottom pb-3">
+		<div class="row">
+			<h3>{{ object.description }} - Details</h3>
+		</div>
+	</div>
+</header>
 <p><strong>Date:</strong> {{ object.date }}</p>
 <p><strong>Description:</strong> {{ object.description }}</p>
 <p><strong>Amount:</strong> Kshs {{ object.amount }}</p>
