@@ -47,6 +47,10 @@ button:hover {
 	background-color: #2980b9;
 }
 
+a:hover {
+	text-decoration: none;
+}
+
 /* Add styles for the "Back" button */
 .btn-secondary {
 	background-color: #555;
