@@ -19,3 +19,11 @@
 	{% endfor %}
 </ul>
 <p>Lorem Ipsum</p>
+
+
+
+{% if messages %} {% for message in messages %}
+		<div class="alert alert-{{ message.tags }}">{{ message }}</div>
+		{% endfor %} {% endif %} {% block content %}
+		<br />
+		{% endblock content %}
