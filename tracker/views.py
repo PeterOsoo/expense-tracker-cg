@@ -5,6 +5,9 @@ from django.urls import reverse_lazy
 from django.views.generic.edit import DeleteView
 from django.utils.decorators import method_decorator
 
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from datetime import datetime
+
 
 from django.contrib.auth.forms import UserCreationForm
 from django.views.generic import DetailView
@@ -29,8 +32,54 @@ def expense_list(request):
 
     return render(request, 'tracker/expense_list.html', {'expenses': expenses})
 
-# detail view
 
+@login_required
+def paginated_view(request):
+    queryset = Expense.objects.all()
+
+    # Group expenses by month
+    expenses_by_month = {}
+    for expense in queryset:
+        month_year = expense.date.strftime('%B %Y')
+        if month_year not in expenses_by_month:
+            expenses_by_month[month_year] = []
+        expenses_by_month[month_year].append(expense)
+
+    # Sort months in descending order
+    sorted_months = sorted(expenses_by_month.keys(), reverse=True)
+
+    # Paginate based on months
+    # Each page contains expenses for a specific month
+    paginator = Paginator(sorted_months, 1)
+
+  # Get the latest month by default
+    current_month_year = datetime.now().strftime('%B %Y')
+    default_page_index = sorted_months.index(current_month_year)
+    default_page = paginator.page(
+        (default_page_index // paginator.per_page) * paginator.per_page + 1)
+
+    page = request.GET.get('page', default_page)
+
+    try:
+        # Get the month for the current page
+        month_year = paginator.page(page).object_list[0]
+        months = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        month_year = paginator.page(1).object_list[0]
+        months = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g., 9999), deliver last page of results.
+        month_year = paginator.page(paginator.num_pages).object_list[0]
+        months = paginator.page(paginator.num_pages)
+
+    # Retrieve expenses for the selected month
+    expenses = expenses_by_month.get(month_year, [])
+
+    return render(request, 'tracker/paginated.html', {'months': months, 'expenses': expenses})
+
+
+# detail view
 
 class ExpenseDetailView(DetailView):
     model = Expense
