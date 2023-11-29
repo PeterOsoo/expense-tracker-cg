@@ -28,4 +28,5 @@ urlpatterns = [
     path('logout-confirmation/', user_views.logout_confirmation,
          name='logout_confirmation'),
     path('', include('tracker.urls')),
+    path('profile/', user_views.profile, name='profile'),
 ]

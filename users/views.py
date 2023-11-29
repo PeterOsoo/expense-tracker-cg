@@ -4,8 +4,9 @@ from .decorators import redirect_logged_in_user
 from django.contrib import messages
 from django.contrib.auth import login as auth_login, logout
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.decorators import login_required
 
-from .forms import CustomUserCreationForm
+from .forms import CustomUserCreationForm, UserProfileForm
 
 
 # Create your views here.
@@ -51,3 +52,20 @@ def logout_confirmation(request):
         # If the user is logged in, log them out
         logout(request)
         return render(request, 'users/logout_confirmation.html')
+
+
+@login_required
+def profile(request):
+    if request.method == 'POST':
+        user_form = UserProfileForm(
+            request.POST, request.FILES, instance=request.user.userprofile)
+
+        if user_form.is_valid():
+            user_form.save()
+            # Redirect to the profile page after saving
+            return redirect('profile')
+
+    else:
+        user_form = UserProfileForm(instance=request.user.userprofile)
+
+    return render(request, 'users/profile.html', {'user_form': user_form})
