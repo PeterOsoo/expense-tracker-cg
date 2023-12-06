@@ -24,3 +24,9 @@ class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields = ['profile_picture']
+
+    def __init__(self, *args, **kwargs):
+        super(UserProfileForm, self).__init__(*args, **kwargs)
+        # Set a default image if the profile picture is not provided
+        if not self.instance.profile_picture:
+            self.fields['profile_picture'].widget.attrs['data-default'] = 'profile_pics/default_profile.png'
