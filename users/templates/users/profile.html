@@ -1,22 +1,16 @@
-{% extends 'base.html' %} {% block content %} {% load static %}
-<h2>{{ user.username }} Profile</h2>
-<form method="post" enctype="multipart/form-data">
-	{% csrf_token %} {{ user_form.as_p }}
-	<button type="submit">Update Profile</button>
-</form>
-
-<!-- Display the profile picture with the default if not provided -->
-{% if user.userprofile.profile_picture %}
-<img
-	src="{{ user.userprofile.profile_picture.url }}"
-	alt="Profile Picture"
-	id="profile-picture"
-/>
-{% else %}
-<!-- Display a default image if the profile picture is not provided -->
-<img
-	src="{% static 'profile_pics/default_profile.png' %}"
-	alt="Default Profile Picture"
-	id="profile-picture"
-/>
-{% endif %} {% endblock %}
+{% extends "base.html" %} {% load crispy_forms_tags %} {% block content %}
+<div class="content-section">
+	<div class="media">
+		<img
+			class="rounded-circle account-img"
+			src="{{ user.userprofile.profile_picture.url }}"
+			alt="Profile Image"
+		/>
+		<div class="media-body">
+			<h2 class="account-heading">{{ user.username }}</h2>
+			<p class="text-secondary">{{ user.email }}</p>
+		</div>
+	</div>
+	<!-- FORM HERE -->
+</div>
+{% endblock content %}
