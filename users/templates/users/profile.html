@@ -1,7 +1,22 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %} {% block content %} {% load static %}
 <h2>{{ user.username }} Profile</h2>
 <form method="post" enctype="multipart/form-data">
 	{% csrf_token %} {{ user_form.as_p }}
 	<button type="submit">Update Profile</button>
 </form>
-{% endblock %}
+
+<!-- Display the profile picture with the default if not provided -->
+{% if user.userprofile.profile_picture %}
+<img
+	src="{{ user.userprofile.profile_picture.url }}"
+	alt="Profile Picture"
+	id="profile-picture"
+/>
+{% else %}
+<!-- Display a default image if the profile picture is not provided -->
+<img
+	src="{% static 'profile_pics/default_profile.png' %}"
+	alt="Default Profile Picture"
+	id="profile-picture"
+/>
+{% endif %} {% endblock %}
