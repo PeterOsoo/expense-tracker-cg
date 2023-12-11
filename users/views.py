@@ -6,7 +6,7 @@ from django.contrib.auth import login as auth_login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 
-from .forms import CustomUserCreationForm, UserProfileForm
+from .forms import CustomUserCreationForm, UserProfileForm, UserUpdateForm, ProfileUpdateForm
 
 
 # Create your views here.
@@ -56,16 +56,13 @@ def logout_confirmation(request):
 
 @login_required
 def profile(request):
-    if request.method == 'POST':
-        user_form = UserProfileForm(
-            request.POST, request.FILES, instance=request.user.userprofile)
 
-        if user_form.is_valid():
-            user_form.save()
-            # Redirect to the profile page after saving
-            return redirect('profile')
+    u_form = UserUpdateForm(instance=request.user)
+    p_form = ProfileUpdateForm(instance=request.user.userprofile)
 
-    else:
-        user_form = UserProfileForm(instance=request.user.userprofile)
+    context = {
+        'u_form': u_form,
+        'p_form': p_form
+    }
 
-    return render(request, 'users/profile.html', {'user_form': user_form})
+    return render(request, 'users/profile.html', context)
