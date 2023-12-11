@@ -73,3 +73,9 @@ a:hover {
 .btn-danger:hover {
 	background-color: #c0392b;
 }
+
+/* styles.css */
+.profile-image {
+	max-width: 200px;
+	max-height: 200px;
+}
