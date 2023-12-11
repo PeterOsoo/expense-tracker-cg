@@ -1,4 +1,17 @@
 
+ if request.method == 'POST':
+        user_form = UserProfileForm(
+            request.POST, request.FILES, instance=request.user.userprofile)
+
+        if user_form.is_valid():
+            user_form.save()
+            # Redirect to the profile page after saving
+            return redirect('profile')
+
+    else:
+        user_form = UserProfileForm(instance=request.user.userprofile)
+
+		
 <ul>
 	{% for expense in expenses %}
 	<li>
