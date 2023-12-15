@@ -32,6 +32,7 @@ urlpatterns = [
          name='logout_confirmation'),
     path('', include('tracker.urls')),
     path('profile/', user_views.profile, name='profile'),
+    path('income/', include('income.urls')),
 ]
 
 
