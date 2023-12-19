@@ -152,4 +152,10 @@ def balance(request):
     # Calculate the balance
     balance = total_income - total_expenses
 
-    return render(request, 'tracker/balance.html', {'total_income': total_income, 'total_expenses': total_expenses, 'balance': balance})
+    context = {
+        'total_income': total_income,
+        'total_expenses': total_expenses,
+        'balance': balance
+    }
+
+    return render(request, 'tracker/balance.html', context)
