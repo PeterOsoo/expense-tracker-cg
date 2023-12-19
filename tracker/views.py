@@ -17,7 +17,11 @@ from django.contrib import messages
 
 
 from .models import Expense
+from income.models import Income
 from .forms import ExpenseForm
+
+
+from django.db.models import Sum
 
 
 def index(request):
@@ -135,3 +139,17 @@ class ExpenseDeleteView(DeleteView):
             # Redirect to the expense list for unauthorized users
             return redirect('expense_list')
         return super().get(request, *args, **kwargs)
+
+
+@login_required
+def balance(request):
+    # Calculate total income and expenses
+    total_income = Income.objects.filter(user=request.user).aggregate(
+        total=Sum('amount'))['total'] or 0
+    total_expenses = Expense.objects.filter(
+        user=request.user).aggregate(total=Sum('amount'))['total'] or 0
+
+    # Calculate the balance
+    balance = total_income - total_expenses
+
+    return render(request, 'tracker/balance.html', {'total_income': total_income, 'total_expenses': total_expenses, 'balance': balance})
