@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'users',
     'income',
     'crispy_forms',
+    'django.contrib.humanize',
 
 ]
 
