@@ -2,6 +2,9 @@ pip install django-crispy-forms
 
 register.html
 
+admin.site.register(IncomeSource)
+
+
 
 <div class="form-group">
 		{{ form.username.label_tag }} {{ form.username }}
