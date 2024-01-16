@@ -2,8 +2,22 @@
 <!-- Load the humanize template tag library -->
 
 {% block content %}
-<h2>Balance</h2>
+<h2>Account Status</h2>
 <p>Total Income: KES {{ total_income|floatformat:2|intcomma }}</p>
 <p>Total Expenses: KES {{ total_expenses|floatformat:2|intcomma }}</p>
-<p>Balance: KES {{ balance|floatformat:2|intcomma }}</p>
-{% endblock %}
+
+{% if balance >= 0 %}
+<button type="button" class="btn btn-secondary">
+	Balance: KES {{ balance|floatformat:2|intcomma }}
+</button>
+
+<p>There is money in your Account</p>
+{% else %}
+<button type="button" class="btn btn-danger">
+	Balance: KES {{ balance|floatformat:2|intcomma }}
+</button>
+
+<p>Your account is overdrawn</p>
+
+<button type="button" class="btn-info">Balance</button>
+{% endif %} {% endblock %}
