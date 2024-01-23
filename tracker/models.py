@@ -19,5 +19,8 @@ class Expense(models.Model):
     category = models.ForeignKey(
         Category, on_delete=models.SET_NULL, null=True, blank=True)
 
+    # receipt_image = models.ImageField(
+    #     upload_to='receipts/', null=True, blank=True, default='default_receipt.jpg')
+
     def __str__(self):
-        return f"{self.description} by {self.user} "
+        return f"{self.description} on {self.date} by {self.user} "
