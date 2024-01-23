@@ -20,4 +20,9 @@
 <p>Your account is overdrawn</p>
 
 <button type="button" class="btn-info">Balance</button>
+{% endif %}
+
+<!-- when user is new  -->
+{% if total_income == 0 %}
+<p>You have not recorded any income yet</p>
 {% endif %} {% endblock %}
