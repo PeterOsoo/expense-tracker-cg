@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-	<a class="navbar-brand" href="{% url 'home' %}"> Kakatiyo</a>
+	<a class="navbar-brand pl-5" href="{% url 'home' %}"> Kakatiyo</a>
 	<button
 		class="navbar-toggler"
 		type="button"
@@ -11,7 +11,7 @@
 	>
 		<span class="navbar-toggler-icon"></span>
 	</button>
-	<div class="collapse navbar-collapse" id="navbarNav">
+	<div class="collapse navbar-collapse pr-4" id="navbarNav">
 		<ul class="navbar-nav ml-auto">
 			{% if user.is_authenticated %}
 			<li class="nav-item">
