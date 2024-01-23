@@ -12,6 +12,15 @@
 <p><strong>Amount:</strong> Kshs {{ object.amount }}</p>
 <p><strong>Category:</strong> {{ object.category }}</p>
 <p><strong>Receipt:</strong> Image of receipt</p>
+{% if expense.receipt_image %}
+<img
+	src="{{ expense.receipt_image.url }}"
+	alt="Receipt Image"
+	style="max-width: 100px; max-height: 100px"
+/>
+{% else %}
+<p>No Receipt Image</p>
+{% endif %}
 <!-- Add more details as needed -->
 <br />
 {% if user.is_authenticated %}
