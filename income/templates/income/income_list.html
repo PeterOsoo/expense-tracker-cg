@@ -1,9 +1,9 @@
 {% extends 'base.html' %} {% block content %}
 <h2>Income List</h2>
+<a href="{% url 'add_income' %}" class="btn btn-secondary btn-sm">Add Income</a>
 <ul>
 	{% for income in incomes %}
 	<li>{{ income.amount }} from {{ income.source }} on {{ income.date }}</li>
 	{% endfor %}
 </ul>
-<a href="{% url 'add_income' %}">Add Income</a>
 {% endblock %}
