@@ -1,19 +1,16 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 
+from django.utils.decorators import method_decorator
+from django.views.generic import ListView, DetailView
 from django.views.generic.edit import DeleteView
 from django.utils.decorators import method_decorator
 
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from datetime import datetime
-
-
-from django.contrib.auth.forms import UserCreationForm
-from django.views.generic import DetailView
-
-
-from django.contrib import messages
 
 
 from .models import Expense
@@ -28,13 +25,17 @@ def index(request):
     return render(request, 'home.html', {})
 
 
-@login_required
-def expense_list(request):
-    # expenses = Expense.objects.all()
-    # expenses = Expense.objects.filter(user=request.user)
-    expenses = Expense.objects.filter(user=request.user).order_by('-date')
+@method_decorator(login_required, name='dispatch')
+class ExpenseListView(ListView):
+    model = Expense
+    template_name = 'tracker/expense_list.html'
+    context_object_name = 'expenses'
+    paginate_by = 10  # Set the number of expenses per page
+    ordering = ['-date']
 
-    return render(request, 'tracker/expense_list.html', {'expenses': expenses})
+    def get_queryset(self):
+        # Filter expenses by the logged-in user
+        return Expense.objects.filter(user=self.request.user).order_by('-date')
 
 
 @login_required
