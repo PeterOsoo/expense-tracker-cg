@@ -1,12 +1,12 @@
 from django.urls import path
-from .views import (index, expense_list, paginated_view, add_expense, edit_expense, ExpenseDetailView,
+from .views import (index, ExpenseListView, paginated_view, add_expense, edit_expense, ExpenseDetailView,
                     ExpenseDeleteView, balance)
 
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('', index, name="home"),
-    path('expense/', expense_list, name="expense_list"),
+    path('expense/',  ExpenseListView.as_view(), name="expense_list"),
     path('expenses/', paginated_view, name="paginated"),
     path('add/', add_expense, name='add_expense'),
     path('expenses/<int:pk>/',
