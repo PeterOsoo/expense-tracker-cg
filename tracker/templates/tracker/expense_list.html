@@ -27,7 +27,7 @@
 					href="{% url 'expense_detail' expense.id %}"
 					class="text-decoration-none"
 				>
-					{{ expense.description }}</a
+					{{ expense.description|truncatewords:5 }}</a
 				>
 			</td>
 			<td>KES {{ expense.amount }}</td>
