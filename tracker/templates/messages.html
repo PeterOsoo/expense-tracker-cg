@@ -1,0 +1,18 @@
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li{% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>
+                {% if message.tags == 'success' %}
+                    {% with truncated_message=message|truncatewords:10 %}
+                        {{ truncated_message }}
+                        {% if message|length > truncated_message|length %}
+                            <a href="{% url 'your_redirect_url' %}">Read More</a>
+                        {% endif %}
+                    {% endwith %}
+                {% else %}
+                    {{ message }}
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}
