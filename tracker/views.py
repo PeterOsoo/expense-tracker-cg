@@ -102,6 +102,9 @@ def add_expense(request):
         if form.is_valid():
             form.instance.user = request.user
             form.save()
+            expense = form.cleaned_data.get('description')
+            messages.success(
+                request, f' {expense} expense successfully added!')
             return redirect('expense_list')
     else:
         form = ExpenseForm()
