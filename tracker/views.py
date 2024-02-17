@@ -125,6 +125,9 @@ def edit_expense(request, expense_id):
         form = ExpenseForm(request.POST, instance=expense)
         if form.is_valid():
             form.save()
+            expense = form.cleaned_data.get('description')
+            messages.success(
+                request, f' {expense} expense successfully updated!')
             return redirect('expense_list')
     else:
         form = ExpenseForm(instance=expense)
