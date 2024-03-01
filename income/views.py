@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from .models import Income
 from .forms import IncomeForm
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+
 # Create your views here.
 
 
@@ -19,6 +21,10 @@ def add_income(request):
             income = form.save(commit=False)
             income.user = request.user
             income.save()
+            amount = form.cleaned_data.get('amount')
+            source = form.cleaned_data.get('source')
+            messages.success(
+                request, f'KES {amount} from {source} received & updated!')
             return redirect('income_list')
     else:
         form = IncomeForm()
