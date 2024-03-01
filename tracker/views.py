@@ -147,6 +147,15 @@ class ExpenseDeleteView(DeleteView):
             return redirect('expense_list')
         return super().get(request, *args, **kwargs)
 
+    def delete(self, request, *args, **kwargs):
+        expense = self.get_object()
+
+        # Add success message before deleting
+        expense = form.cleaned_data.get('description')
+        messages.success(request, f'{expense} expense successfully deleted!')
+
+        return super().delete(request, *args, **kwargs)
+
 
 @login_required
 def balance(request):
