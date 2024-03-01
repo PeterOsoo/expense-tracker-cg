@@ -22,7 +22,7 @@ def register(request):
             auth_login(request, user)
             username = form.cleaned_data.get('username')
             messages.success(
-                request, f'Account created successfully for {username}! You have been logged in automatically!')
+                request, f'Account created successfully for {username}! You have been logged in!')
             return redirect('expense_list')
     else:
         form = CustomUserCreationForm()
