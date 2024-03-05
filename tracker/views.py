@@ -175,3 +175,11 @@ def balance(request):
     }
 
     return render(request, 'tracker/balance.html', context)
+
+
+def custom_404(request, exception=None, undefined_path=None):
+    return render(request, 'tracker/404.html', {'path': undefined_path}, status=404)
+
+
+def custom_500(request):
+    return render(request, 'tracker/500.html', {}, status=500)

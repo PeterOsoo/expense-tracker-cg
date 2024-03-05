@@ -22,6 +22,10 @@ from users import views as user_views
 from django.conf import settings
 from django.conf.urls.static import static
 
+from django.conf.urls import handler404, handler500
+from tracker.views import custom_404, custom_500
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('register/', user_views.register, name='register'),
@@ -39,3 +43,7 @@ urlpatterns = [
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,
                           document_root=settings.MEDIA_ROOT)
+
+
+handler404 = custom_404
+handler500 = custom_500

@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import (index, ExpenseListView, paginated_view, add_expense, edit_expense, ExpenseDetailView,
-                    ExpenseDeleteView, balance)
+                    ExpenseDeleteView, balance, custom_404)
 
 from django.contrib.auth import views as auth_views
 
@@ -16,6 +16,8 @@ urlpatterns = [
     path('expense/delete/<int:pk>/', ExpenseDeleteView.as_view(),
          name='delete_expense'),
     path('balance/', balance, name='balance'),
+    path('<path:undefined_path>/', custom_404),
+
 
 
 ]
