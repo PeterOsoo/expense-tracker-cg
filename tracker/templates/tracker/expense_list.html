@@ -3,8 +3,17 @@
 <header class="py-4" style="color: #151515">
 	<div class="container">
 		<div class="row">
-			<h3>Welcome to your expense tracker. Here are your expenses.</h3>
-			<h5>You have a total of {{ page_obj.paginator.count }} expenses</h5>
+			<div class="col-md-8">
+				<h3>Welcome to your expense tracker. Here are your expenses.</h3>
+				<h5>You have a total of {{ page_obj.paginator.count }} expenses</h5>
+			</div>
+			<div class="col-md-4 text-right">
+				<a
+					class="btn btn-primary btn-dark btn-sm"
+					href="{% url 'add_expense' %}"
+					>Add Expense</a
+				>
+			</div>
 		</div>
 	</div>
 </header>
