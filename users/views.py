@@ -9,9 +9,6 @@ from django.contrib.auth.decorators import login_required
 from .forms import CustomUserCreationForm, UserProfileForm, UserUpdateForm, ProfileUpdateForm
 
 
-# Create your views here.
-
-
 @redirect_logged_in_user
 def register(request):
     if request.method == 'POST':
