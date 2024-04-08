@@ -35,8 +35,8 @@ urlpatterns = [
     path('logout-confirmation/', user_views.logout_confirmation,
          name='logout_confirmation'),
     path('', include('tracker.urls')),
-    path('profile/', user_views.profile, name='profile'),
-    path('inc/', include('income.urls')),
+    path('profile/', include('users.urls')),
+    path('income/', include('income.urls')),
 ]
 
 
