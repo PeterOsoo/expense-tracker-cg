@@ -30,13 +30,12 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('register/', user_views.register, name='register'),
     path('login/', user_views.login, name='login'),
-    # path('logout/', user_views.logout_view, name='logout'),
     path('logout/', auth_views.LogoutView.as_view(next_page='logout_confirmation'), name='logout'),
     path('logout-confirmation/', user_views.logout_confirmation,
          name='logout_confirmation'),
-    path('', include('tracker.urls')),
     path('profile/', include('users.urls')),
     path('income/', include('income.urls')),
+    path('', include('tracker.urls')),
 ]
 
 
