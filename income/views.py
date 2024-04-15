@@ -13,6 +13,10 @@ def income_list(request):
     return render(request, 'income/income_list.html', {'incomes': incomes})
 
 
+def new_list(request):
+    return render(request, 'income/list.html', {})
+
+
 @login_required
 def add_income(request):
     if request.method == 'POST':
