@@ -32,6 +32,11 @@ def login(request):
         form = AuthenticationForm(request, request.POST)
         if form.is_valid():
             auth_login(request, form.get_user())
+            username = form.cleaned_data.get('username')
+
+            messages.success(
+                request, f'{username} has been logged in successfully!')
+
             return redirect('home')
     else:
         form = AuthenticationForm()
